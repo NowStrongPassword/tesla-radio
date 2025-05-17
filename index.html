@@ -9,13 +9,26 @@
     .radio { margin: 25px 0; background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 600px; margin-left: auto; margin-right: auto; }
     audio { width: 100%; margin-top: 10px; }
   </style>
+  <script>
+    // Stop all other radios when one starts playing
+    window.addEventListener('DOMContentLoaded', () => {
+      const players = document.querySelectorAll('audio');
+      players.forEach(player => {
+        player.addEventListener('play', () => {
+          players.forEach(other => {
+            if (other !== player) other.pause();
+          });
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <h1>🎧 Moje Rádiá pre Tesla</h1>
 
   <div class="radio">
     <h3>Fun Rádio</h3>
-    <audio controls autoplay>
+    <audio controls>
       <source src="http://stream.funradio.sk:8000/fun128.mp3" type="audio/mpeg">
     </audio>
   </div>
