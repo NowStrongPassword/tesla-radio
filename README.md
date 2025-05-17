@@ -45,7 +45,25 @@ https://<tvoje-uzivatelske-meno>.github.io/<nazov-repozitara>/
 3. Nahraď `src="..."` vlastným streamom (ideálne vo formáte MP3).
 
 Príklad:
-```html
+```
 <audio controls>
-<source src="https://moj-stream.sk/radio128.mp3" type="audio/mpeg">
+  <source src="https://moj-stream.sk/radio128.mp3" type="audio/mpeg">
 </audio>
+```
+
+
+---
+
+📄 Licencia
+
+Projekt je open-source pod licenciou MIT. Používaj voľne, vylepšuj a zdieľaj.
+
+---
+
+## ☕ Podpor projekt
+
+Ak ti táto stránka pomohla a chceš ma podporiť, môžeš mi kúpiť virtuálnu kávu:
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%E2%98%95-orange?style=for-the-badge)](https://skusimto.org/donate)
+
+
