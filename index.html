@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <title>Moje Rádiá v Tesle</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    h1 { margin-bottom: 30px; }
+    .radio { margin: 20px 0; }
+    audio { width: 90%; max-width: 500px; }
+  </style>
+</head>
+<body>
+  <h1>Moje Rádiá v Tesle</h1>
+
+  <div class="radio">
+    <h3>Fun Rádio</h3>
+    <audio controls>
+      <source src="http://stream.funradio.sk:8000/fun128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Europa 2</h3>
+    <audio controls>
+      <source src="https://stream.bauermedia.sk/europa2.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Kiss</h3>
+    <audio controls>
+      <source src="http://icecast1.play.cz/kiss128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Spin</h3>
+    <audio controls>
+      <source src="http://icecast4.play.cz/spin128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</body>
+</html>
