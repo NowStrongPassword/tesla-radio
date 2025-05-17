@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <title>Moje Rádiá v Tesle</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    body { font-family: sans-serif; text-align: center; padding: 40px; background-color: #f7f7f7; }
     h1 { margin-bottom: 30px; }
-    .radio { margin: 20px 0; }
-    audio { width: 90%; max-width: 500px; }
+    .radio { margin: 25px 0; background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 600px; margin-left: auto; margin-right: auto; }
+    audio { width: 100%; margin-top: 10px; }
   </style>
 </head>
 <body>
   <h1>Moje Rádiá v Tesle</h1>
 
+  <!-- Tvoje rádia -->
   <div class="radio">
     <h3>Fun Rádio</h3>
     <audio controls>
@@ -40,5 +41,78 @@
       <source src="http://icecast4.play.cz/spin128.mp3" type="audio/mpeg">
     </audio>
   </div>
+
+  <h1>Najpočúvanejšie online rádiá</h1>
+
+  <div class="radio">
+    <h3>Radio Express</h3>
+    <audio controls>
+      <source src="https://stream.radioexpres.sk/128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Fajn Rádio</h3>
+    <audio controls>
+      <source src="http://icecast4.play.cz/fajn128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Evropa 2 CZ</h3>
+    <audio controls>
+      <source src="http://icecast4.play.cz/evropa2-128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>BBC Radio 1</h3>
+    <audio controls>
+      <source src="http://stream.live.vc.bbcmedia.co.uk/bbc_radio_one" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>NRJ France</h3>
+    <audio controls>
+      <source src="http://cdn.nrjaudio.fm/adwz1/fr/30001/mp3_128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Radio Swiss Pop</h3>
+    <audio controls>
+      <source src="https://stream.srg-ssr.ch/m/rsj/mp3_128" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Radio 1 Praha</h3>
+    <audio controls>
+      <source src="http://icecast.radio1.cz:8000/radio1.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Rádio Rock</h3>
+    <audio controls>
+      <source src="https://stream.radiorock.sk/rock128.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Chillizet (PL)</h3>
+    <audio controls>
+      <source src="https://stream.polskieradio.pl/program4.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="radio">
+    <h3>Radio Paradise</h3>
+    <audio controls>
+      <source src="https://stream.radioparadise.com/mp3-192" type="audio/mpeg">
+    </audio>
+  </div>
+
 </body>
 </html>
