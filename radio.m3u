@@ -14,7 +14,7 @@ https://23543.live.streamtheworld.com/FAJN_RADIO_128.mp3
 #EXTINF:-1,Evropa 2 CZ
 https://ice.actve.net/fm-evropa2-128
 #EXTINF:-1,BBC Radio 1
-https://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8
+http://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=96000
 #EXTINF:-1,NRJ France
 http://185.52.127.168/fr/30001/mp3_128.mp3
 #EXTINF:-1,Radio Paradise
