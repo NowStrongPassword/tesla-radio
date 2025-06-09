@@ -11,31 +11,30 @@
   </style>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
+    // Stop all other radios when one starts playing
     window.addEventListener('DOMContentLoaded', () => {
       const players = document.querySelectorAll('audio');
-
-      // Stop all other radios when one starts playing
       players.forEach(player => {
         player.addEventListener('play', () => {
           players.forEach(other => {
             if (other !== player) other.pause();
           });
         });
-
-        // Podpora HLS streamov pomocou data-hls atribútu
-        const hlsUrl = player.getAttribute('data-hls');
-        if (hlsUrl) {
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(hlsUrl);
-            hls.attachMedia(player);
-          } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
-            player.src = hlsUrl;
-          } else {
-            player.outerHTML = "<p>Prehliadač nepodporuje tento HLS stream.</p>";
-          }
-        }
       });
+
+      // HLS.js pre BBC Radio 1
+      const bbcAudio = document.getElementById('bbcRadio1');
+      const streamUrl = "http://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=96000";
+
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(bbcAudio);
+      } else if (bbcAudio.canPlayType('application/vnd.apple.mpegurl')) {
+        bbcAudio.src = streamUrl;
+      } else {
+        bbcAudio.outerHTML = "<p>Prehliadač nepodporuje BBC Radio 1 stream (HLS).</p>";
+      }
     });
   </script>
 </head>
@@ -93,7 +92,7 @@
 
   <div class="radio">
     <h3>BBC Radio 1</h3>
-    <audio controls data-hls="http://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=96000"></audio>
+    <audio id="bbcRadio1" controls></audio>
   </div>
 
   <div class="radio">
