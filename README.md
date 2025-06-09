@@ -24,6 +24,8 @@ Tento projekt obsahuje jednoduchú webovú stránku s výberom populárnych slov
 - Spin
 - Radio Express
 - Evropa 2 CZ
+- BBC Radio 1
+- NRJ France
 - Radio Paradise
 
 ---
