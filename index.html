@@ -4,110 +4,225 @@
   <meta charset="UTF-8">
   <title>Moje Rádiá v Tesle</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 40px; background-color: #f0f0f0; }
-    h1 { margin-bottom: 30px; }
-    .radio { margin: 25px 0; background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); max-width: 600px; margin-left: auto; margin-right: auto; }
-    audio { width: 100%; margin-top: 10px; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      text-align: center; 
+      padding: 40px 20px; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 { 
+      margin-bottom: 30px; 
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .radio { 
+      margin: 20px auto; 
+      background: rgba(255,255,255,0.95); 
+      padding: 20px; 
+      border-radius: 15px; 
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2); 
+      max-width: 600px;
+      color: #333;
+      transition: transform 0.2s ease;
+    }
+    .radio:hover {
+      transform: translateY(-2px);
+    }
+    .radio h3 {
+      margin: 0 0 15px 0;
+      color: #2c3e50;
+      font-size: 1.3em;
+    }
+    audio { 
+      width: 100%; 
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+    .status {
+      font-size: 0.9em;
+      margin-top: 5px;
+      opacity: 0.7;
+    }
+    .error {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .loading {
+      color: #f39c12;
+    }
+    .playing {
+      color: #27ae60;
+    }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    // Stop all other radios when one starts playing
-    window.addEventListener('DOMContentLoaded', () => {
-      const players = document.querySelectorAll('audio');
-      players.forEach(player => {
-        player.addEventListener('play', () => {
-          players.forEach(other => {
-            if (other !== player) other.pause();
-          });
-        });
-      });
-
-      // HLS.js pre BBC Radio 1
-      const bbcAudio = document.getElementById('bbcRadio1');
-      const streamUrl = "http://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=96000";
-
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(streamUrl);
-        hls.attachMedia(bbcAudio);
-      } else if (bbcAudio.canPlayType('application/vnd.apple.mpegurl')) {
-        bbcAudio.src = streamUrl;
-      } else {
-        bbcAudio.outerHTML = "<p>Prehliadač nepodporuje BBC Radio 1 stream (HLS).</p>";
-      }
-    });
-  </script>
 </head>
 <body>
   <h1>🎧 Moje Rádiá v Tesle</h1>
-
+  
+  <!-- Slovenské rádiá -->
   <div class="radio">
-    <h3>Fun Rádio</h3>
-    <audio controls>
-      <source src="http://stream.funradio.sk:8000/fun128.mp3" type="audio/mpeg">
+    <h3>🇸🇰 Fun Rádio</h3>
+    <audio controls preload="none">
+      <source src="https://stream.funradio.sk:8443/fun128.mp3" type="audio/mpeg">
+      <source src="https://stream.funradio.sk/fun128.mp3" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-fun"></div>
   </div>
 
   <div class="radio">
-    <h3>Europa 2 SK</h3>
-    <audio controls>
+    <h3>🇸🇰 Europa 2 SK</h3>
+    <audio controls preload="none">
       <source src="https://stream.bauermedia.sk/europa2.mp3" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-europa2sk"></div>
   </div>
 
   <div class="radio">
-    <h3>Kiss</h3>
-    <audio controls>
-      <source src="http://icecast1.play.cz/kiss128.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-
-  <div class="radio">
-    <h3>Spin</h3>
-    <audio controls>
-      <source src="http://icecast4.play.cz/spin128.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-
-  <div class="radio">
-    <h3>Radio Express</h3>
-    <audio controls>
+    <h3>🇸🇰 Radio Express</h3>
+    <audio controls preload="none">
+      <source src="https://stream.bauermedia.sk/express128.mp3" type="audio/mpeg">
       <source src="https://stream.bauermedia.sk/128.mp3" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-express"></div>
   </div>
 
+  <!-- České rádiá -->
   <div class="radio">
-    <h3>Fajn Rádio</h3>
-    <audio controls>
-      <source src="https://23543.live.streamtheworld.com/FAJN_RADIO_128.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-
-  <div class="radio">
-    <h3>Evropa 2 CZ</h3>
-    <audio controls>
+    <h3>🇨🇿 Evropa 2 CZ</h3>
+    <audio controls preload="none">
       <source src="https://ice.actve.net/fm-evropa2-128" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-europa2cz"></div>
   </div>
 
   <div class="radio">
-    <h3>BBC Radio 1</h3>
-    <audio id="bbcRadio1" controls></audio>
-  </div>
-
-  <div class="radio">
-    <h3>NRJ France</h3>
-    <audio controls>
-      <source src="http://185.52.127.168/fr/30001/mp3_128.mp3" type="audio/mpeg">
+    <h3>🇨🇿 Kiss Radio</h3>
+    <audio controls preload="none">
+      <source src="https://icecast1.play.cz/kiss128.mp3" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-kiss"></div>
   </div>
 
   <div class="radio">
-    <h3>Radio Paradise</h3>
-    <audio controls>
+    <h3>🇨🇿 Spin Radio</h3>
+    <audio controls preload="none">
+      <source src="https://icecast4.play.cz/spin128.mp3" type="audio/mpeg">
+    </audio>
+    <div class="status" id="status-spin"></div>
+  </div>
+
+  <div class="radio">
+    <h3>🇨🇿 Fajn Rádio</h3>
+    <audio controls preload="none">
+      <source src="https://23543.live.streamtheworld.com/FAJN_RADIO_128.mp3" type="audio/mpeg">
+    </audio>
+    <div class="status" id="status-fajn"></div>
+  </div>
+
+  <!-- Medzinárodné rádiá -->
+  <div class="radio">
+    <h3>🇬🇧 BBC Radio 1</h3>
+    <audio controls preload="none">
+      <source src="https://stream.live.vc.bbcmedia.co.uk/bbc_radio_one" type="audio/mpeg">
+      <source src="https://stream.live.vc.bbcmedia.co.uk/bbc_radio_one.m3u8" type="application/vnd.apple.mpegurl">
+    </audio>
+    <div class="status" id="status-bbc"></div>
+  </div>
+
+  <div class="radio">
+    <h3>🇺🇸 Radio Paradise</h3>
+    <audio controls preload="none">
+      <source src="https://stream.radioparadise.com/aac-320" type="audio/aac">
       <source src="https://stream.radioparadise.com/mp3-192" type="audio/mpeg">
     </audio>
+    <div class="status" id="status-paradise"></div>
   </div>
 
+  <div class="radio">
+    <h3>🇫🇷 NRJ France</h3>
+    <audio controls preload="none">
+      <source src="https://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3" type="audio/mpeg">
+    </audio>
+    <div class="status" id="status-nrj"></div>
+  </div>
+
+  <script>
+    // Funkcia pre zastavenie ostatných rádií
+    function stopOtherRadios(currentPlayer) {
+      const allPlayers = document.querySelectorAll('audio');
+      allPlayers.forEach(player => {
+        if (player !== currentPlayer && !player.paused) {
+          player.pause();
+        }
+      });
+    }
+
+    // Funkcia pre aktualizáciu statusu
+    function updateStatus(audio, statusId, message, className = '') {
+      const statusElement = document.getElementById(statusId);
+      if (statusElement) {
+        statusElement.textContent = message;
+        statusElement.className = 'status ' + className;
+      }
+    }
+
+    // Inicializácia po načítaní stránky
+    document.addEventListener('DOMContentLoaded', function() {
+      const audioElements = document.querySelectorAll('audio');
+      
+      audioElements.forEach((audio, index) => {
+        const statusId = audio.parentElement.querySelector('.status').id;
+        
+        // Event listenery pre každé rádio
+        audio.addEventListener('loadstart', () => {
+          updateStatus(audio, statusId, 'Načítavam...', 'loading');
+        });
+
+        audio.addEventListener('canplay', () => {
+          updateStatus(audio, statusId, 'Pripravené na prehrávanie', '');
+        });
+
+        audio.addEventListener('play', () => {
+          stopOtherRadios(audio);
+          updateStatus(audio, statusId, '🎵 Hrá', 'playing');
+        });
+
+        audio.addEventListener('pause', () => {
+          updateStatus(audio, statusId, 'Pozastavené', '');
+        });
+
+        audio.addEventListener('error', (e) => {
+          let errorMsg = 'Chyba pri načítaní';
+          if (e.target.error) {
+            switch(e.target.error.code) {
+              case e.target.error.MEDIA_ERR_ABORTED:
+                errorMsg = 'Načítanie zrušené';
+                break;
+              case e.target.error.MEDIA_ERR_NETWORK:
+                errorMsg = 'Chyba siete';
+                break;
+              case e.target.error.MEDIA_ERR_DECODE:
+                errorMsg = 'Chyba dekódovania';
+                break;
+              case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                errorMsg = 'Stream nepodporovaný';
+                break;
+            }
+          }
+          updateStatus(audio, statusId, errorMsg, 'error');
+        });
+
+        audio.addEventListener('waiting', () => {
+          updateStatus(audio, statusId, 'Načítavam dáta...', 'loading');
+        });
+
+        audio.addEventListener('playing', () => {
+          updateStatus(audio, statusId, '🎵 Hrá', 'playing');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
