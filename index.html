@@ -65,8 +65,7 @@
   <div class="radio">
     <h3>🇸🇰 Fun Rádio</h3>
     <audio controls preload="none">
-      <source src="https://stream.funradio.sk:8443/fun128.mp3" type="audio/mpeg">
-      <source src="https://stream.funradio.sk/fun128.mp3" type="audio/mpeg">
+      <source src="http://stream.funradio.sk:8000/fun128.mp3" type="audio/mpeg">
     </audio>
     <div class="status" id="status-fun"></div>
   </div>
@@ -82,7 +81,6 @@
   <div class="radio">
     <h3>🇸🇰 Radio Express</h3>
     <audio controls preload="none">
-      <source src="https://stream.bauermedia.sk/express128.mp3" type="audio/mpeg">
       <source src="https://stream.bauermedia.sk/128.mp3" type="audio/mpeg">
     </audio>
     <div class="status" id="status-express"></div>
@@ -123,11 +121,8 @@
 
   <!-- Medzinárodné rádiá -->
   <div class="radio">
-    <h3>🇬🇧 BBC Radio 1</h3>
-    <audio controls preload="none">
-      <source src="https://stream.live.vc.bbcmedia.co.uk/bbc_radio_one" type="audio/mpeg">
-      <source src="https://stream.live.vc.bbcmedia.co.uk/bbc_radio_one.m3u8" type="application/vnd.apple.mpegurl">
-    </audio>
+    <h3>🇬🇧 BBC Radio 1 (HLS)</h3>
+    <audio id="bbcRadio1" controls preload="none"></audio>
     <div class="status" id="status-bbc"></div>
   </div>
 
@@ -143,7 +138,7 @@
   <div class="radio">
     <h3>🇫🇷 NRJ France</h3>
     <audio controls preload="none">
-      <source src="https://cdn.nrjaudio.fm/audio1/fr/30001/mp3_128.mp3" type="audio/mpeg">
+      <source src="http://185.52.127.168/fr/30001/mp3_128.mp3" type="audio/mpeg">
     </audio>
     <div class="status" id="status-nrj"></div>
   </div>
@@ -171,6 +166,29 @@
     // Inicializácia po načítaní stránky
     document.addEventListener('DOMContentLoaded', function() {
       const audioElements = document.querySelectorAll('audio');
+      
+      // Špecialny handling pre BBC Radio 1 s HLS (pôvodný funkčný stream)
+      const bbcAudio = document.getElementById('bbcRadio1');
+      if (bbcAudio) {
+        const streamUrl = "http://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=96000";
+        
+        // Skúsime rôzne prístupy pre Tesla Browser
+        try {
+          // Prvý pokus - priame nastavenie src
+          bbcAudio.src = streamUrl;
+          
+          // Druhý pokus - cez innerHTML ak prvý nefunguje
+          bbcAudio.addEventListener('error', function() {
+            console.log('Prvý pokus neúspešný, skúšam innerHTML');
+            bbcAudio.innerHTML = '<source src="' + streamUrl + '" type="application/vnd.apple.mpegurl">';
+            bbcAudio.load();
+          }, { once: true });
+          
+        } catch (error) {
+          console.log('Chyba pri načítaní BBC:', error);
+          updateStatus(bbcAudio, 'status-bbc', 'Tesla Browser nepodporuje HLS', 'error');
+        }
+      }
       
       audioElements.forEach((audio, index) => {
         const statusId = audio.parentElement.querySelector('.status').id;
